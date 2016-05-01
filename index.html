@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="author" content="Marcotan"/>
+	<meta name="keywords" content="极客学院, VIP, 视频嗅探, 视频解析, 视频下载, IT, HTML, PHP, Android, iOS, PS, CSS"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	<title>极客学院VIP视频嗅探、视频解析</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.css"/>
+	<link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+	<style>
+		body{
+			background-color: #49BB7C;
+			height: auto;
+		}
+		#title{
+			margin-top: 20px;
+			color: #FFF;
+		}
+		#analyse{
+			margin-left: 5px;
+		}
+		#contact{
+			float: right;
+			color: #F2F2F2;
+			font-family: 'Microsoft YaHei';
+			display: block;
+		}
+		#donate{
+			color: #F2F2F2;
+			font-family: 'Microsoft YaHei';
+			display: block;
+		}
+		.comment{
+			background-color: #FFF;
+			padding: 5px;
+			border-radius: 5px;
+		}
+		.readme{
+			color: #FFF;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="ui container">
+		<h1 id="title" class="ui header centered" style="font-family: 'Microsoft YaHei';">极客学院VIP视频嗅探</h1>
+		<div id="finder">
+			<div class="ui labeled input fluid">
+				<div class="ui label">URL:</div>
+				<input type="text" id="url" class="ui input" placeholder="举个栗子：http://www.jikexueyuan.com/course/181.html" value="http://www.jikexueyuan.com/course/181.html"/>
+				<button id="analyse" class="ui button teal inverted">解析</button>
+			</div>
+		</div>
+		<table class="ui celled table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>标题</th>
+					<th>时长</th>
+					<th>链接</th>
+				</tr>
+			</thead>
+			<tbody id="list"></tbody>
+		</table>
+		<p class="readme">如果出现解析失败，请重新解析，毕竟服务器不是很好。</p>
+		<a id="contact" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ttvXxNXZwtfY9sDfxpjHx5jV2ds">有疑问？点击联系作者</a>
+		<a id="donate" target="_blank" href="./donate.html">小额捐赠</a>
+		<div class="comment">
+			<div class="ds-thread" data-thread-key="1" data-title="Marcotan" data-url="http://marcotan.sinaapp.com"></div>
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"marcotan"};
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		</div>
+		<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257458361'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257458361%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+	</div>
+	<div id="loader" class="ui dimmer">
+	<div class="ui text loader">Loading...</div>
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/clipboard.js/1.5.8/clipboard.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#analyse").on("click", function(){
+				$("#loader").addClass("active");
+				$.get("./parse.php", {"url": $("#url").val()}, function(data){
+					var snippet = "";
+					$.each(data, function(i, n){
+						snippet += "<tr>";
+						snippet += "<td>"+n.id+"</td>";
+						snippet += "<td>"+n.title+"</td>";
+						snippet += "<td>"+n.time+"</td>";
+						snippet += '<td><div class="ui action input" style="width: 100%;"><input id="item'+n.id+'" type="text" value="'+n.src+'"><button class="ui icon button" data-clipboard-target="#item'+n.id+'"> 复制 </button></div></td>';
+						snippet += "</tr>";
+					});
+					$("#list").html(snippet);
+					$("#loader").removeClass("active");
+				});
+			});
+			var clipboard = new Clipboard(".button");
+		});
+	</script>
+</body>
+</html>

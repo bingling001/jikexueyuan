@@ -1,4 +1,7 @@
-*目录结构*
+# 极客学院VIP视频解析 #
+*如果觉得极客学院好用，请购买他们的VIP，如果觉得此代码好用，请给作者一个爱的抱抱，支付宝: tmk@li.cm*
+
+## 目录结构 ##
 ```
 │  config.php
 │  favicon.ico
@@ -13,7 +16,7 @@
         clipboard.min.js
         jquery.min.js
 ```
-*文件说明*
+## 文件说明 ##
 - index.html        //前端页面
 - favicon.ico       //图标文件
 - parse.php         //解析（关键）
@@ -22,7 +25,7 @@
 - jquery.min.js     //jQuery
 - clipboard.min.js  //提供复制到剪贴板功能
 
-*config.php配置方法（important）*
+## config.php配置方法（important）##
 1. 首先你得有一个VIP账号，
 2. 登陆极客学院官网
 3. 找到你的Cookies(不知道怎么找就百度吧)
